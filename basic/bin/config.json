@@ -1,0 +1,64 @@
+{
+  "workspace": "/root/workspace/renqian/segmentation/exp0",
+  "model": "scannet",
+  "dataset": {
+    "train": {
+      "otsu_folder": "/root/workspace/renqian/0929/prepare_data/wsi_otsu_save/train_resize_64",
+      "resize": 64,
+      "gt_mask_folder": "/root/workspace/huangxs/prepare_data/16/wsi_mask/train_64",
+      "downsample": 64,
+      "sampler": "RandomSampler",
+      "threshold": 0.4,
+      "tif_folder": "/root/workspace/dataset/CAMELYON16/training/*",
+      "patch_size": 256,
+      "crop_size": 244,
+      "data_size": 200000
+    },
+    "valid": {
+      "normal_list" : "/root/workspace/renqian/1115/patch_list/validation/normal_valid.txt",
+      "tumor_list" : "/root/workspace/renqian/1115/patch_list/validation/tumor_valid.txt",
+      "tif_folder": "/root/workspace/dataset/CAMELYON16/training/*",
+      "patch_size": 256,
+      "crop_size": 244
+    },
+    "hard": {
+      "tif_folder": "/root/workspace/dataset/CAMELYON16/training/*",
+      "patch_size": 256,
+      "crop_size": 244,
+      "datasize": 200000
+    }
+  },
+  "train": {
+    "GPU": [0,1,2],
+    "batch_size": 128,
+    "num_workers": 10,
+    "loss": "CrossEntropyLoss",
+    "start": 0,
+    "last": 120,
+    "optimizer": {
+      "optim": "SGD",
+      "lr": 0.02,
+      "momentum": 0.9,
+      "weight_decay": 0.1
+    },
+    "scheduler": {
+      "gama": 0.1,
+      "star_epoch": 5,
+      "last_epoch": 20
+    }
+  },
+  "valid": {
+    "batch_size": 128,
+    "num_workers": 10
+  },
+  "hard": {
+    "batch_size": 256,
+    "num_workers": 20,
+    "loss": "CrossEntropyLoss",
+    "optimizer": {
+      "optim": "SGD",
+      "lr": 0.02,
+      "momentum": 0.9
+    }
+  }
+}
