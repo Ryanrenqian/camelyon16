@@ -102,7 +102,7 @@ class Checkpointer(object):
         if epoch >= 0:
             ckpt_name = self.ckpt_pattern.format(epoch)
             if os.path.exists(ckpt_name):
-                state_dict = torch.load(ckpt_name).cuda()
+                state_dict = torch.load(ckpt_name,"cpu")
                 print(f"checkpoint {ckpt_name} loaded")
                 return (
                     state_dict["net"],

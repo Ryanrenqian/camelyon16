@@ -13,5 +13,3 @@ optims={
 Loss={
     "CrossEntropyLoss":nn.CrossEntropyLoss()
 }
-def fn_out(x):
-    return F.softmax(x)[:,1]

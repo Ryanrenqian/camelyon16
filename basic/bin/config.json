@@ -42,9 +42,9 @@
       "weight_decay": 0.1
     },
     "scheduler": {
-      "gama": 0.1,
-      "star_epoch": 5,
-      "last_epoch": 20
+      "gamma": 0.1,
+      "star_epoch": [5,20],
+      "last_epoch": -1
     }
   },
   "valid": {

@@ -26,3 +26,6 @@ class Scannet(nn.Module):
         x = self.features(x)
         x = self.classifier(x)
         return x
+
+def scannet_out(x):
+    return F.softmax(x)[:,1].cpu()

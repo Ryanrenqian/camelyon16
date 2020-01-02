@@ -2,7 +2,7 @@ import sys,os,argparse,json,logging
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 from basic.data.PreData import preData
 from basic.data.DataLoader import DynamicLoader,ValidDataLoader,HardDataLoader
-from basic.models import MODELS
+from basic.models import MODELS,OUT_FN
 from basic.train import valid_epoch,train_epoch,Loss,optims,hard_epoch
 import torch.nn as nn
 import torch.optim as optim
@@ -43,19 +43,23 @@ def main():
     net = nn.DataParallel(MODELS[model_name](), device_ids=train_config['GPU'])
     optimizer = optims[train_config["optimizer"]["optim"]](net.parameters(), lr=train_config["optimizer"]['lr'], momentum=train_config["optimizer"]['momentum'],weight_decay=train_config["optimizer"]['weight_decay'])
     save = os.path.join(config['workspace'], 'train', 'model')
+    out_fn=OUT_FN[config["model"]]
     if not os.path.exists(save):
         os.system(f"mkdir -p {save}")
     ckpter = Checkpointer(save)
     ckpt = ckpter.load(train_config['start'])
+    net.to('cuda')
     if ckpt[0]:
         net.load_state_dict(ckpt[0])
+        net = net.to('cuda')
         optimizer.load_state_dict(ckpt[1])
         train_config['start'] = ckpt[2]+1
     # set train
-    net=net.to('cuda')
     loss_fn = Loss[train_config['loss']]
-    # scheduler=optim.lr_scheduler.StepLR(optimizer, step_size=train_config['scheduler']['star_epoch'],
-    #                                                         gamma=train_config['scheduler']['gama'], last_epoch=train_config['scheduler']['last_epoch'])
+    scheduler=optim.lr_scheduler.StepLR(optimizer,
+                                        step_size=train_config['scheduler']['star_epoch'],
+                                        gamma=train_config['scheduler']['gamma'],
+                                        last_epoch=train_config['scheduler']['last_epoch'])
     # visualization
     visualize_path=os.path.join(config['workspace'],'train','visualization')
     writer=SummaryWriter(visualize_path)
@@ -63,18 +67,19 @@ def main():
     best_valid_acc = 0
     for epoch in range(train_config['start'],train_config['last']):
         # train
-        total_acc, pos_acc, neg_acc, loss=train_epoch(epoch, net, loss_fn, train_dataloader.load_data(**train_config),  optimizer)
-        writer.add_scalar('acc in train',total_acc),epoch
-        writer.add_scalar('pos_acc in train', pos_acc,epoch)
-        writer.add_scalar('neg_acc in train', neg_acc,epoch)
-        writer.add_scalar('loss in train', loss,epoch)
+        total_acc, pos_acc, neg_acc, loss=train_epoch(epoch, net,loss_fn,out_fn, train_dataloader.load_data(**train_config),  optimizer)
+        writer.add_scalar('acc_in_train',total_acc),epoch
+        writer.add_scalar('pos_acc_in_train', pos_acc,epoch)
+        writer.add_scalar('neg_acc_in_train', neg_acc,epoch)
+        writer.add_scalar('loss_in_train', loss,epoch)
         writer.add_scalar('Lr', optimizer.state_dict()['param_groups'][0]['lr'], epoch)
+        scheduler.step()
         # valid
-        total_acc, pos_acc, neg_acc, loss = valid_epoch(net, loss_fn, valid_dataloader.load_data(**valid_config))
-        writer.add_scalar('acc in valid', total_acc,epoch)
-        writer.add_scalar('pos_acc in valid', pos_acc,epoch)
-        writer.add_scalar('neg_acc in valid', neg_acc,epoch)
-        writer.add_scalar('loss in valid', loss,epoch)
+        total_acc, pos_acc, neg_acc, loss = valid_epoch(net,loss_fn,out_fn, valid_dataloader.load_data(**valid_config))
+        writer.add_scalar('acc_in_valid', total_acc,epoch)
+        writer.add_scalar('pos_acc_in_valid', pos_acc,epoch)
+        writer.add_scalar('neg_acc_in_valid', neg_acc,epoch)
+        writer.add_scalar('loss_in_valid', loss,epoch)
         state_dict = {
             "net": net.state_dict(),
             "optimizer": optimizer.state_dict(),
@@ -99,21 +104,21 @@ def main():
     optimizer = optims[hard_config["optimizer"]](net.parameters(), lr=hard_config["optimizer"]['lr'])
     for epoch in range(hard_config['epoch']):
         # find hard expamples
-        hardlist=hard_epoch(epoch, net, loss_fn, train_dataloader.load_data(**hard_config), optimizer)
+        hardlist=hard_epoch(epoch, net, loss_fn,out_fn, train_dataloader.load_data(**hard_config), optimizer)
         hard_dataloader=HardDataLoader(hardlist,**config['dataset']['hard'])
         # train
         total_acc, pos_acc, neg_acc, loss = train_epoch(epoch,loss_fn,hard_dataloader,optimizer)
-        writer.add_scalar('acc in hard', total_acc), epoch
-        writer.add_scalar('pos_acc in hard', pos_acc, epoch)
-        writer.add_scalar('neg_acc in hard', neg_acc, epoch)
-        writer.add_scalar('loss in hard', loss, epoch)
-        writer.add_scalar('Lr in hard ', optimizer.state_dict()['param_groups'][0]['lr'], epoch)
+        writer.add_scalar('acc_in_hard', total_acc), epoch
+        writer.add_scalar('pos_acc_in_hard', pos_acc, epoch)
+        writer.add_scalar('neg_acc_in_hard', neg_acc, epoch)
+        writer.add_scalar('loss_in_hard', loss, epoch)
+        writer.add_scalar('Lr_in_hard ', optimizer.state_dict()['param_groups'][0]['lr'], epoch)
         # valid
         total_acc, pos_acc, neg_acc, loss = valid_epoch(net, loss_fn, valid_dataloader.load_data(**valid_config))
-        writer.add_scalar('acc in valid', total_acc,epoch)
-        writer.add_scalar('pos_acc in valid', pos_acc,epoch)
-        writer.add_scalar('neg_acc in valid', neg_acc,epoch)
-        writer.add_scalar('loss in valid', loss,epoch)
+        writer.add_scalar('acc_in_valid', total_acc,epoch)
+        writer.add_scalar('pos_acc_in_valid', pos_acc,epoch)
+        writer.add_scalar('neg_acc_in_valid', neg_acc,epoch)
+        writer.add_scalar('loss_in_valid', loss,epoch)
         state_dict = {
             "net": net.state_dict(),
             "optimizer": optimizer.state_dict(),
