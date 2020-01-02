@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="34175a4c-8f0b-4db9-b615-1e99cb7195dc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/bin/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/bin/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/train/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/train/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +100,7 @@
       <workItem from="1577682273060" duration="459000" />
       <workItem from="1577682744592" duration="4356000" />
       <workItem from="1577755139609" duration="21667000" />
-      <workItem from="1577785310217" duration="12042000" />
+      <workItem from="1577785310217" duration="13005000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <created>1577783644826</created>
@@ -118,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577953110722</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="upload ground truth ofjson type and wsi prepare">
+      <created>1577954866153</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1577954866153</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,7 +131,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first version" />
-    <option name="LAST_COMMIT_MESSAGE" value="first version" />
+    <MESSAGE value="upload ground truth ofjson type and wsi prepare" />
+    <option name="LAST_COMMIT_MESSAGE" value="upload ground truth ofjson type and wsi prepare" />
   </component>
   <component name="WindowStateProjectService">
     <state x="736" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577786911451">
@@ -141,10 +147,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="991" y="320" key="#main/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577770388494" />
-    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1577953109387">
+    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1577957063409">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577953109387" />
+    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577957063409" />
     <state x="1141" y="591" key="Github.ShareDialog" timestamp="1577784471765">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -185,10 +191,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="343" key="SettingsEditor/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577785756756" />
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1577953112737">
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1577954934667">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577953112737" />
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577954934667" />
     <state x="965" y="525" key="com.intellij.ide.util.TipDialog" timestamp="1577785312873">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
