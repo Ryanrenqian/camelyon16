@@ -2,20 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34175a4c-8f0b-4db9-b615-1e99cb7195dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/predata/validation/normal_valid.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/predata/validation/tumor_valid.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/16_cmd_line-checkpoint.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/Untitled-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/__init__-checkpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/log_wsi_otsu-checkpoint.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/train_test_prepare-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/util-checkpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/wsi_generate_patch_list-checkpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/wsi_mask-checkpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/wsi_otsu-checkpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/.ipynb_checkpoints/wsi_prepare_analysis-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wsi_prepare/Untitled.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wsi_prepare/log_wsi_generate_patch_list.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wsi_prepare/log_wsi_otsu.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wsi_prepare/train_test_prepare.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wsi_prepare/wsi_otsu.py" beforeDir="false" afterPath="$PROJECT_DIR$/wsi_prepare/wsi_otsu.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +26,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
+  <component name="JupyterTrust" id="9ad3ffda-218f-4f44-b7c9-8373e28a1fd6" />
   <component name="ProjectId" id="1Vgkktth7BfV0uw0ddsHLA1V4de" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -113,7 +106,7 @@
       <workItem from="1577682273060" duration="459000" />
       <workItem from="1577682744592" duration="4356000" />
       <workItem from="1577755139609" duration="21667000" />
-      <workItem from="1577785310217" duration="13251000" />
+      <workItem from="1577785310217" duration="14727000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <created>1577783644826</created>
@@ -143,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577957064679</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="upload validation dataset">
+      <created>1577957241799</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1577957241799</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,30 +168,30 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="991" y="320" key="#main/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577770388494" />
-    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1577957063409">
+    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1577957240325">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577957063409" />
+    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577957240325" />
     <state x="1141" y="591" key="Github.ShareDialog" timestamp="1577784471765">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1141" y="591" key="Github.ShareDialog/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577784471765" />
-    <state width="2517" height="400" key="GridCell.Tab.0.bottom" timestamp="1577953171545">
+    <state width="2517" height="400" key="GridCell.Tab.0.bottom" timestamp="1577958797252">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577953171545" />
-    <state width="2517" height="400" key="GridCell.Tab.0.center" timestamp="1577953171545">
+    <state width="2517" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577958797252" />
+    <state width="2517" height="400" key="GridCell.Tab.0.center" timestamp="1577958797252">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.center/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577953171545" />
-    <state width="2517" height="400" key="GridCell.Tab.0.left" timestamp="1577953171544">
+    <state width="2517" height="400" key="GridCell.Tab.0.center/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577958797252" />
+    <state width="2517" height="400" key="GridCell.Tab.0.left" timestamp="1577958797252">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.left/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577953171544" />
-    <state width="2517" height="400" key="GridCell.Tab.0.right" timestamp="1577953171545">
+    <state width="2517" height="400" key="GridCell.Tab.0.left/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577958797252" />
+    <state width="2517" height="400" key="GridCell.Tab.0.right" timestamp="1577958797252">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="400" key="GridCell.Tab.0.right/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577953171545" />
+    <state width="2517" height="400" key="GridCell.Tab.0.right/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577958797252" />
     <state width="2517" height="492" key="GridCell.Tab.1.bottom" timestamp="1577785299578">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -212,10 +212,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="343" key="SettingsEditor/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577785756756" />
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1577957066497">
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1577957244767">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577957066497" />
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577957244767" />
     <state x="965" y="525" key="com.intellij.ide.util.TipDialog" timestamp="1577785312873">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

@@ -15,8 +15,7 @@ import multiprocessing
 import threading
 import glob
 import argparse
-
-from code.wsi_prepare import util
+import util
 
 '''
     issue：解决wsi在不同level的坐标偏移
