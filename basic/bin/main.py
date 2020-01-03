@@ -69,7 +69,7 @@ def main():
     for epoch in range(train_config['start'],train_config['last']):
         # train
         total_acc, pos_acc, neg_acc, loss=train_epoch(epoch, net,loss_fn,out_fn, train_dataloader.load_data(**train_config),  optimizer)
-        writer.add_scalar('acc_in_train',total_acc),epoch
+        writer.add_scalar('acc_in_train',total_acc,epoch)
         writer.add_scalar('pos_acc_in_train', pos_acc,epoch)
         writer.add_scalar('neg_acc_in_train', neg_acc,epoch)
         writer.add_scalar('loss_in_train', loss,epoch)

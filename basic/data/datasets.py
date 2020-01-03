@@ -61,7 +61,7 @@ class ListDataset(data.Dataset):
         return len(self.patch_name_list)
 
 class ValidDataset():
-    def __init__(self,normal_list,tumor_list,transform,patch_size,tif_folder='/root/workspace/dataset/CAMELYON16/training/*'):
+    def __init__(self,normal_list,tumor_list,patch_size,tif_folder='/root/workspace/dataset/CAMELYON16/training/*',transform=None):
         self.tumor = ListDataset(list_file=tumor_list,
                                  tif_folder=tif_folder,
                                  transform=transform,

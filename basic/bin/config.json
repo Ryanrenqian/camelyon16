@@ -1,5 +1,5 @@
 {
-  "workspace": "/root/workspace/renqian/segmentation/exp0",
+  "workspace": "/root/workspace/renqian/segmentation/exp1",
   "model": "scannet",
   "dataset": {
     "train": {
@@ -8,7 +8,7 @@
       "gt_mask_folder": "/root/workspace/huangxs/prepare_data/16/wsi_mask/train_64",
       "downsample": 64,
       "sampler": "RandomSampler",
-      "threshold": 0.4,
+      "threshold": 0.1,
       "tif_folder": "/root/workspace/dataset/CAMELYON16/training/*",
       "patch_size": 256,
       "crop_size": 244,
@@ -43,7 +43,7 @@
     },
     "scheduler": {
       "gamma": 0.1,
-      "step_size": [5,30]
+      "step_size": [30]
     }
   },
   "valid": {

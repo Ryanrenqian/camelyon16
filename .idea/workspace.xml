@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="34175a4c-8f0b-4db9-b615-1e99cb7195dc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/wsi_mask.py" beforeDir="false" afterPath="$PROJECT_DIR$/wsi_prepare/wsi_mask.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/wsi_otsu.py" beforeDir="false" afterPath="$PROJECT_DIR$/wsi_prepare/wsi_otsu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/bin/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/basic/bin/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/bin/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/bin/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/data/DataLoader.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/DataLoader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/data/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/datasets.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +106,7 @@
       <workItem from="1577682273060" duration="459000" />
       <workItem from="1577682744592" duration="4356000" />
       <workItem from="1577755139609" duration="21667000" />
-      <workItem from="1577785310217" duration="26341000" />
+      <workItem from="1577785310217" duration="36930000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <created>1577783644826</created>
@@ -175,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578025273677</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update wsi_mask and wsi_otsu.py">
+      <created>1578032395253</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1578032395253</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +197,8 @@
     <MESSAGE value="upload validation dataset" />
     <MESSAGE value="debug scheduler" />
     <MESSAGE value="add posttreatment and analysis module" />
-    <option name="LAST_COMMIT_MESSAGE" value="add posttreatment and analysis module" />
+    <MESSAGE value="update wsi_mask and wsi_otsu.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="update wsi_mask and wsi_otsu.py" />
   </component>
   <component name="WindowStateProjectService">
     <state x="736" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577786911451">
@@ -202,30 +213,30 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="991" y="320" key="#main/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577770388494" />
-    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1578025270195">
+    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1578032393578">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578025270195" />
+    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578032393578" />
     <state x="1141" y="591" key="Github.ShareDialog" timestamp="1577784471765">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1141" y="591" key="Github.ShareDialog/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577784471765" />
-    <state width="2502" height="488" key="GridCell.Tab.0.bottom" timestamp="1578020273159">
+    <state width="2502" height="397" key="GridCell.Tab.0.bottom" timestamp="1578043711549">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="488" key="GridCell.Tab.0.bottom/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578020273159" />
-    <state width="2502" height="488" key="GridCell.Tab.0.center" timestamp="1578020273159">
+    <state width="2502" height="397" key="GridCell.Tab.0.bottom/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578043711549" />
+    <state width="2502" height="397" key="GridCell.Tab.0.center" timestamp="1578043711549">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="488" key="GridCell.Tab.0.center/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578020273159" />
-    <state width="2502" height="488" key="GridCell.Tab.0.left" timestamp="1578020273159">
+    <state width="2502" height="397" key="GridCell.Tab.0.center/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578043711549" />
+    <state width="2502" height="397" key="GridCell.Tab.0.left" timestamp="1578043711549">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="488" key="GridCell.Tab.0.left/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578020273159" />
-    <state width="2502" height="488" key="GridCell.Tab.0.right" timestamp="1578020273159">
+    <state width="2502" height="397" key="GridCell.Tab.0.left/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578043711549" />
+    <state width="2502" height="397" key="GridCell.Tab.0.right" timestamp="1578043711549">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="488" key="GridCell.Tab.0.right/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578020273159" />
+    <state width="2502" height="397" key="GridCell.Tab.0.right/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578043711549" />
     <state width="2502" height="488" key="GridCell.Tab.1.bottom" timestamp="1578020273159">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -246,10 +257,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="343" key="SettingsEditor/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577785756756" />
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1578025276957">
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1578038316758">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578025276957" />
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578038316758" />
     <state x="965" y="525" key="com.intellij.ide.util.TipDialog" timestamp="1577785312873">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -263,23 +274,7 @@
     </state>
     <state x="977" y="492" key="git4idea.merge.GitPullDialog/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577784652551" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/basic/bin/main.py</url>
-          <line>59</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/basic/bin/main.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/segmentation$main.coverage" NAME="main Coverage Results" MODIFIED="1578020201382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/basic/bin" />
+    <SUITE FILE_PATH="coverage/segmentation$main.coverage" NAME="main Coverage Results" MODIFIED="1578043711543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/basic/bin" />
   </component>
 </project>

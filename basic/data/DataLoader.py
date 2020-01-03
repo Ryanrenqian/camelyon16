@@ -71,10 +71,10 @@ class ValidDataLoader(DataLoader):
     def __init__(self,**kwargs):
         super(DataLoader,self).__init__()
         _size = kwargs["crop_size"]
-        transform = self.get_transforms(shorter_side_range=(_size, _size), size=(_size, _size))
+        # transform = self.get_transforms(shorter_side_range=(_size, _size), size=(_size, _size))
         self.dataset = DATASET["ValidDataset"](tumor_list=kwargs["tumor_list"],
                                                      normal_list=kwargs["normal_list"],
-                                                     transform=transform,
+                                                     # transform=transform,
                                                      tif_folder=kwargs["tif_folder"],
                                                      patch_size=kwargs["patch_size"])
 
