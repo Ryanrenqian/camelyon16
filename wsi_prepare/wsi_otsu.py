@@ -188,6 +188,8 @@ def main_flow(slide_path, xml_path, save_folder, down_sample):
     :return:
     """
     save_basename = os.path.basename(slide_path).split('.')[0]
+    if os.path.exists('%s/%s_resize_%02d_anno.png' % (save_folder, save_basename, down_sample)):
+        return None
     time_flow_start = time.time()
     slide = openslide.open_slide(slide_path)
     scale_dim = [int(dim / down_sample) for dim in slide.level_dimensions[0]]
