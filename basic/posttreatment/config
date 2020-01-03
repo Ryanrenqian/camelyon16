@@ -1,0 +1,12 @@
+{
+  "name": "basic config for test",
+  "dense": 1,
+  "workspace": "/root/workspace/renqian/1115/result/exp7_1/train/epoch32",
+  "slide_folder": "/root/workspace/dataset/CAMELYON16/testing/images/",
+  "otsu": "/root/workspace/huangxs/prepare_data/16/wsi_otsu_save/",
+  "pth": "/root/workspace/renqian/1115/result/exp7_1/train/models/epoch_32_train_model.pth",
+  "resize":64,
+  "pools": 20,
+  "connectivity": 2,
+  "kernel": 8
+}
