@@ -48,18 +48,19 @@ def main():
         os.system(f"mkdir -p {save}")
     ckpter = Checkpointer(save)
     ckpt = ckpter.load(train_config['start'])
-    net.to('cuda')
+    last_epoch = -1
     if ckpt[0]:
         net.load_state_dict(ckpt[0])
-        net = net.to('cuda')
         optimizer.load_state_dict(ckpt[1])
         train_config['start'] = ckpt[2]+1
+        last_epoch = ckpt[2]
+    net.to('cuda')
     # set train
     loss_fn = Loss[train_config['loss']]
-    # scheduler=optim.lr_scheduler.StepLR(optimizer,
-    #                                     step_size=train_config['scheduler']['star_epoch'],
-    #                                     gamma=train_config['scheduler']['gamma'],
-    #                                     last_epoch=train_config['scheduler']['last_epoch'])
+    scheduler = optim.lr_scheduler.MultiStepLR(optimizer,
+                                        train_config['scheduler']['step_size'],
+                                        gamma=train_config['scheduler']['gamma'],
+                                        last_epoch=last_epoch)
     # visualization
     visualize_path=os.path.join(config['workspace'],'train','visualization')
     writer=SummaryWriter(visualize_path)
@@ -67,13 +68,13 @@ def main():
     best_valid_acc = 0
     for epoch in range(train_config['start'],train_config['last']):
         # train
-        total_acc, pos_acc, neg_acc, loss=train_epoch(epoch, net,loss_fn,out_fn, train_dataloader.load_data(**train_config),  optimizer)
+        total_acc, pos_acc, neg_acc, loss,optimizer=train_epoch(epoch, net,loss_fn,out_fn, train_dataloader.load_data(**train_config),  optimizer)
         writer.add_scalar('acc_in_train',total_acc),epoch
         writer.add_scalar('pos_acc_in_train', pos_acc,epoch)
         writer.add_scalar('neg_acc_in_train', neg_acc,epoch)
         writer.add_scalar('loss_in_train', loss,epoch)
         writer.add_scalar('Lr', optimizer.state_dict()['param_groups'][0]['lr'], epoch)
-        # scheduler.step()
+        scheduler.step()
         # valid
         total_acc, pos_acc, neg_acc, loss = valid_epoch(net,loss_fn,out_fn, valid_dataloader.load_data(**valid_config))
         writer.add_scalar('acc_in_valid', total_acc,epoch)

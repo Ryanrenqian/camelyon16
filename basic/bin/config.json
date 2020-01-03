@@ -43,8 +43,7 @@
     },
     "scheduler": {
       "gamma": 0.1,
-      "star_epoch": [5,20],
-      "last_epoch": -1
+      "step_size": [5,30]
     }
   },
   "valid": {
