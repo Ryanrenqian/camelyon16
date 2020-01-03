@@ -60,7 +60,7 @@ def train_epoch(epoch,net,loss_fn,out_fn,dataloader,optimizer):
     pos_acc = TP / total_pos
     neg_acc = TN / total_neg
     # logging.info(f"train new epoch:{epoch}, lr:{optimizer.state_dict()['param_groups'][0]['lr']:0.5f}, [total:{total_acc:0.2f}-pos:{pos_acc:0.2f}-neg:{pos_acc:0.2f}], loss:{losses.avg:.2f},time consume:{time_counter.interval():.2f }s\r")
-    return total_acc, pos_acc, neg_acc, losses.avg,optimizer
+    return total_acc, pos_acc, neg_acc, losses.avg
 
 
 
@@ -76,7 +76,7 @@ def valid_epoch(net,loss_fn,out_fn,dataloader):
             inputs = Variable(inputs.type(torch.cuda.FloatTensor))
         else:
             inputs = Variable(inputs.type(torch.FloatTensor))
-        outputs = net(inputs).squeeze()
+        outputs = net(inputs).squeeze().cpu()
         loss = loss_fn(outputs, labels)
         probs = out_fn(outputs)
         correct_pos, total_pos, correct_neg, total_neg = acc_metric(probs, labels, 0.5)
@@ -100,7 +100,7 @@ def hard_epoch(net,loss_fn,out_fn,dataloader,epoch,workspace):
     samples = 0
     for i, data in enumerate(dataloader, 0):
         inputs, class_ids, patch_names = data
-        outputs = net(inputs)
+        outputs = net(inputs).squeeze().cpu()
         outputs = out_fn(outputs)
         correct_pos, total_pos, correct_neg, total_neg = acc_metric(outputs, class_ids, 0.5)
         samples += len(outputs)
