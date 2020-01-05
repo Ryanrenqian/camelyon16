@@ -67,16 +67,17 @@ class LoaderOne(DataLoader):
     def __init__(self,**kwargs):
         super(LoaderOne,self).__init__()
         _size=kwargs["crop_size"]
+        _patch_size=kwargs["patch_size"]
         self.trainset=DATASET["ValidDataset"](tumor_list=kwargs['train']["tumor_list"],
                                                      normal_list=kwargs['train']["normal_list"],
                                                      transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
                                                      tif_folder=kwargs['train']["tif_folder"],
-                                                     patch_size=kwargs['train']["patch_size"])
+                                                     patch_size=_patch_size)
         self.validset = DATASET["ValidDataset"](tumor_list=kwargs['valid']["tumor_list"],
                                                      normal_list=kwargs["normal_list"],
                                                      transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
                                                      tif_folder=kwargs['valid']["tif_folder"],
-                                                     patch_size=kwargs['valid']["patch_size"])
+                                                     patch_size=_patch_size)
 
     def load_train_data(self,**kwargs):
         return torch.utils.data.DataLoader(self.trainset.train_data(), batch_size=kwargs["batch_size"],

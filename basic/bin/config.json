@@ -3,6 +3,8 @@
   "model": "scannet",
   "dataloader": "LoaderOne",
   "dataset": {
+    "patch_size": 244,
+      "crop_size": 244,
     "train": {
       "otsu_folder": "/root/workspace/renqian/0929/prepare_data/wsi_otsu_save/train_resize_64",
       "resize": 64,
