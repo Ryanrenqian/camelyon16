@@ -80,7 +80,7 @@ class LoaderOne(DataLoader):
                                                      patch_size=_patch_size)
 
     def load_train_data(self,**kwargs):
-        return torch.utils.data.DataLoader(self.trainset.train_data(), batch_size=kwargs["batch_size"],
+        return torch.utils.data.DataLoader(self.trainset, batch_size=kwargs["batch_size"],
                                            shuffle=True, num_workers=kwargs["num_workers"])
     def load_valid_data(self,**kwargs):
         return torch.utils.data.DataLoader(self.validset, batch_size=kwargs["batch_size"],
