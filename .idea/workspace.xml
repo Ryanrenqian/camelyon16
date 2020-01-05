@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="34175a4c-8f0b-4db9-b615-1e99cb7195dc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/bin/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/basic/bin/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/bin/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/bin/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +109,7 @@
       <workItem from="1577682273060" duration="459000" />
       <workItem from="1577682744592" duration="4356000" />
       <workItem from="1577755139609" duration="21667000" />
-      <workItem from="1577785310217" duration="67121000" />
+      <workItem from="1577785310217" duration="68370000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <created>1577783644826</created>
@@ -202,7 +202,21 @@
       <option name="project" value="LOCAL" />
       <updated>1578216051538</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="upload NCRF trainset">
+      <created>1578216314101</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1578216314101</updated>
+    </task>
+    <task id="LOCAL-00015" summary="upload NCRF trainset">
+      <created>1578216369312</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1578216369312</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,7 +231,8 @@
     <MESSAGE value="update wsi_mask and wsi_otsu.py" />
     <MESSAGE value="update README.md" />
     <MESSAGE value="update DataLoader.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="update DataLoader.py" />
+    <MESSAGE value="upload NCRF trainset" />
+    <option name="LAST_COMMIT_MESSAGE" value="upload NCRF trainset" />
   </component>
   <component name="WindowStateProjectService">
     <state x="736" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577786911451">
@@ -232,10 +247,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="991" y="320" key="#main/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577770388494" />
-    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1578216345352">
+    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1578216366975">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578216345352" />
+    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578216366975" />
     <state x="1061" y="455" key="FileChooserDialogImpl" timestamp="1578207912686">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -280,10 +295,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="343" key="SettingsEditor/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577785756756" />
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1578216318516">
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1578216373209">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578216318516" />
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578216373209" />
     <state x="965" y="525" key="com.intellij.ide.util.TipDialog" timestamp="1577785312873">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -296,17 +311,6 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="977" y="492" key="git4idea.merge.GitPullDialog/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577784652551" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/basic/bin/main.py</url>
-          <line>71</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/segmentation$main.coverage" NAME="main Coverage Results" MODIFIED="1578214907644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/basic/bin" />

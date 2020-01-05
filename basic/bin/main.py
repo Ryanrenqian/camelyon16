@@ -23,8 +23,11 @@ def main():
     with open(args.config,'r')as f:
         config = json.load(f)
     # set train_dataset
-    dataset =  os.path.join(config['workspace'],'patch_list')
-    config["dataset"]["train"]["save_path"]=dataset
+    if config["dataset"]["train"].get("save_path",None):
+        dataset=config["dataset"]["train"]["save_path"]
+    else:
+        dataset =  os.path.join(config['workspace'],'patch_list')
+        config["dataset"]["train"]["save_path"]=dataset
     tumor_list = os.path.join(dataset, 'train_tumor.list')
     normal_list = os.path.join(dataset, 'train_normal.list')
     if not os.path.exists(tumor_list):
