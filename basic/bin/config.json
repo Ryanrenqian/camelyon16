@@ -1,7 +1,7 @@
 {
   "workspace": "/root/workspace/renqian/segmentation/exp3",
   "model": "scannet",
-  "dataloader": "DynamicLoader",
+  "dataloader": "LoaderOne",
   "dataset": {
     "train": {
       "otsu_folder": "/root/workspace/renqian/0929/prepare_data/wsi_otsu_save/train_resize_64",

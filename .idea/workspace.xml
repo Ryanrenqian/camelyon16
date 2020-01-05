@@ -2,30 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34175a4c-8f0b-4db9-b615-1e99cb7195dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/basic/models/aspp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/backbone/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/backbone/drn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/backbone/mobilenet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/backbone/resnet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/backbone/xception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/decoder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/deeplab.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/sync_batchnorm/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/sync_batchnorm/batchnorm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/sync_batchnorm/comm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/sync_batchnorm/replicate.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic/models/sync_batchnorm/unittest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/basic/bin/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/basic/bin/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/bin/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/bin/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/data/DataLoader.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/DataLoader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/data/PreData.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/PreData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/data/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/datasets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/models/scannet.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/models/scannet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/train/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/train/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/utils/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/utils/metrics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +109,7 @@
       <workItem from="1577682273060" duration="459000" />
       <workItem from="1577682744592" duration="4356000" />
       <workItem from="1577755139609" duration="21667000" />
-      <workItem from="1577785310217" duration="66935000" />
+      <workItem from="1577785310217" duration="67121000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <created>1577783644826</created>
@@ -217,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578045130930</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="update DataLoader.py">
+      <created>1578216051538</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1578216051538</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +216,8 @@
     <MESSAGE value="add posttreatment and analysis module" />
     <MESSAGE value="update wsi_mask and wsi_otsu.py" />
     <MESSAGE value="update README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="update README.md" />
+    <MESSAGE value="update DataLoader.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="update DataLoader.py" />
   </component>
   <component name="WindowStateProjectService">
     <state x="736" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577786911451">
@@ -246,10 +232,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="991" y="320" key="#main/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577770388494" />
-    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1578045129174">
+    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1578216048702">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578045129174" />
+    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578216048702" />
     <state x="1061" y="455" key="FileChooserDialogImpl" timestamp="1578207912686">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -294,10 +280,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="343" key="SettingsEditor/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577785756756" />
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1578045133451">
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1578216053597">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578045133451" />
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578216053597" />
     <state x="965" y="525" key="com.intellij.ide.util.TipDialog" timestamp="1577785312873">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
