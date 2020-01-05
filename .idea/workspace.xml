@@ -2,12 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34175a4c-8f0b-4db9-b615-1e99cb7195dc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/basic/models/aspp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/backbone/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/backbone/drn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/backbone/mobilenet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/backbone/resnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/backbone/xception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/decoder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/deeplab.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/sync_batchnorm/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/sync_batchnorm/batchnorm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/sync_batchnorm/comm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/sync_batchnorm/replicate.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/models/sync_batchnorm/unittest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/basic/bin/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/basic/bin/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/basic/bin/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/bin/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/basic/data/DataLoader.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/DataLoader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/data/PreData.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/PreData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/basic/data/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/datasets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/models/scannet.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/models/scannet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/train/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/train/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/utils/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/utils/metrics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +56,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../NCRF" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -47,6 +66,12 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="OPEN_URL_DIALOG">
+      <recent name="https://github.com/jfzhang95/pytorch-deeplab-xception" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\camelyon\segmentation\basic\models" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="B:\camelyon\segmentation\basic" />
     </key>
@@ -106,7 +131,7 @@
       <workItem from="1577682273060" duration="459000" />
       <workItem from="1577682744592" duration="4356000" />
       <workItem from="1577755139609" duration="21667000" />
-      <workItem from="1577785310217" duration="36930000" />
+      <workItem from="1577785310217" duration="66935000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <created>1577783644826</created>
@@ -185,7 +210,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578032395253</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="update README.md">
+      <created>1578045130930</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1578045130930</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,7 +230,8 @@
     <MESSAGE value="debug scheduler" />
     <MESSAGE value="add posttreatment and analysis module" />
     <MESSAGE value="update wsi_mask and wsi_otsu.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="update wsi_mask and wsi_otsu.py" />
+    <MESSAGE value="update README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="update README.md" />
   </component>
   <component name="WindowStateProjectService">
     <state x="736" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577786911451">
@@ -213,54 +246,58 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="991" y="320" key="#main/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577770388494" />
-    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1578032393578">
+    <state x="869" y="294" key="CommitChangelistDialog2" timestamp="1578045129174">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578032393578" />
+    <state x="869" y="294" key="CommitChangelistDialog2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578045129174" />
+    <state x="1061" y="455" key="FileChooserDialogImpl" timestamp="1578207912686">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1061" y="455" key="FileChooserDialogImpl/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578207912686" />
     <state x="1141" y="591" key="Github.ShareDialog" timestamp="1577784471765">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1141" y="591" key="Github.ShareDialog/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577784471765" />
-    <state width="2502" height="397" key="GridCell.Tab.0.bottom" timestamp="1578043711549">
+    <state width="2502" height="397" key="GridCell.Tab.0.bottom" timestamp="1578216026588">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="397" key="GridCell.Tab.0.bottom/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578043711549" />
-    <state width="2502" height="397" key="GridCell.Tab.0.center" timestamp="1578043711549">
+    <state width="2502" height="397" key="GridCell.Tab.0.bottom/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578216026588" />
+    <state width="2502" height="397" key="GridCell.Tab.0.center" timestamp="1578216026587">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="397" key="GridCell.Tab.0.center/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578043711549" />
-    <state width="2502" height="397" key="GridCell.Tab.0.left" timestamp="1578043711549">
+    <state width="2502" height="397" key="GridCell.Tab.0.center/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578216026587" />
+    <state width="2502" height="397" key="GridCell.Tab.0.left" timestamp="1578216026587">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="397" key="GridCell.Tab.0.left/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578043711549" />
-    <state width="2502" height="397" key="GridCell.Tab.0.right" timestamp="1578043711549">
+    <state width="2502" height="397" key="GridCell.Tab.0.left/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578216026587" />
+    <state width="2502" height="397" key="GridCell.Tab.0.right" timestamp="1578216026588">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="397" key="GridCell.Tab.0.right/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578043711549" />
-    <state width="2502" height="488" key="GridCell.Tab.1.bottom" timestamp="1578020273159">
+    <state width="2502" height="397" key="GridCell.Tab.0.right/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578216026588" />
+    <state width="2502" height="488" key="GridCell.Tab.1.bottom" timestamp="1578189059851">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="488" key="GridCell.Tab.1.bottom/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578020273159" />
-    <state width="2502" height="488" key="GridCell.Tab.1.center" timestamp="1578020273159">
+    <state width="2502" height="488" key="GridCell.Tab.1.bottom/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578189059851" />
+    <state width="2502" height="488" key="GridCell.Tab.1.center" timestamp="1578189059851">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="488" key="GridCell.Tab.1.center/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578020273159" />
-    <state width="2502" height="488" key="GridCell.Tab.1.left" timestamp="1578020273159">
+    <state width="2502" height="488" key="GridCell.Tab.1.center/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578189059851" />
+    <state width="2502" height="488" key="GridCell.Tab.1.left" timestamp="1578189059851">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="488" key="GridCell.Tab.1.left/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578020273159" />
-    <state width="2502" height="488" key="GridCell.Tab.1.right" timestamp="1578020273159">
+    <state width="2502" height="488" key="GridCell.Tab.1.left/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578189059851" />
+    <state width="2502" height="488" key="GridCell.Tab.1.right" timestamp="1578189059851">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2502" height="488" key="GridCell.Tab.1.right/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578020273159" />
+    <state width="2502" height="488" key="GridCell.Tab.1.right/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578189059851" />
     <state x="782" y="343" key="SettingsEditor" timestamp="1577785756756">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="343" key="SettingsEditor/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577785756756" />
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1578038316758">
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2" timestamp="1578045133451">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578038316758" />
+    <state x="873" y="434" key="Vcs.Push.Dialog.v2/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578045133451" />
     <state x="965" y="525" key="com.intellij.ide.util.TipDialog" timestamp="1577785312873">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -274,7 +311,18 @@
     </state>
     <state x="977" y="492" key="git4idea.merge.GitPullDialog/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577784652551" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/basic/bin/main.py</url>
+          <line>71</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/segmentation$main.coverage" NAME="main Coverage Results" MODIFIED="1578043711543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/basic/bin" />
+    <SUITE FILE_PATH="coverage/segmentation$main.coverage" NAME="main Coverage Results" MODIFIED="1578214907644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/basic/bin" />
   </component>
 </project>

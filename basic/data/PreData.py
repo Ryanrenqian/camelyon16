@@ -15,7 +15,7 @@ def filter(otsu, x, y, gap, threshold):
 
 
 
-def generate_patch_from_slide(slide_basename, normal_file,tumor_file, otsu_dict, gt_mask_dict, threshold,down_sample=64):
+def generate_patch_from_slide(slide_basename, normal_file,tumor_file ,otsu_dict, gt_mask_dict, threshold,image_size=244,down_sample=64):
     """
     边扫描边生成新的dataset
     """
@@ -30,7 +30,7 @@ def generate_patch_from_slide(slide_basename, normal_file,tumor_file, otsu_dict,
         slide_is_tumor = True
     except:
         slide_is_tumor = False
-    gap= 256 /down_sample
+    gap= image_size /down_sample
     for _x,_y in zip(x, y):
         if filter(slide_otsu, _x, _y, gap,threshold): # 过滤掉低于阈值的区域
             continue
@@ -94,7 +94,7 @@ def preData(**kwargs):
         if skip_slide(otsu):
             continue
         _basename = os.path.basename(otsu).split('_resize')[0]
-        add_t,add_n = generate_patch_from_slide(_basename,  f_n, f_t, otsu_dict, gt_mask_dict, kwargs["threshold"],downsample)
+        add_t,add_n = generate_patch_from_slide(slide_basename=_basename, normal_file=f_n, tumor_file=f_t,otsu_dict=otsu_dict, gt_mask_dict=gt_mask_dict, threshold=kwargs["threshold"],down_sample=downsample)
         tumor_count += add_t
         normal_count += add_n
     logging.info(f'Tumor:{tumor_count}\tNormal:{normal_count}')

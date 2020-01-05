@@ -9,9 +9,7 @@ def acc_metric(output, target, thredshold=0.5):
     total_neg = 0
     correct_pos = 0
     correct_neg = 0
-    for i in range(len(output)):
-        _o = output[i]
-        _t = target[i]
+    for _o,_t in zip(output,target):
         pred_label = 1 if _o > thredshold else 0
         if int(_t) == 1:
             total_pos += 1

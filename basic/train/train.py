@@ -32,11 +32,8 @@ def train_epoch(epoch,net,loss_fn,out_fn,dataloader,optimizer):
     time_counter = Counter()
     time_counter.addval(time.time(), key='training epoch start')
     for i, data in enumerate(tqdm.tqdm(dataloader, dynamic_ncols=True, leave=False), 0):
-        inputs, labels, path_list = data
-        if torch.cuda.is_available():
-            inputs = Variable(inputs.type(torch.cuda.FloatTensor))
-        else:
-            inputs = Variable(inputs.type(torch.FloatTensor))
+        inputs, labels, patch_list = data
+        inputs,labels=inputs.cuda(),labels.cpu()
         outputs = net(inputs).squeeze().cpu()
         #             pdb.set_trace()
         loss = loss_fn(outputs, labels)
@@ -59,8 +56,8 @@ def train_epoch(epoch,net,loss_fn,out_fn,dataloader,optimizer):
     total_acc = (TP + TN) / total
     pos_acc = TP / total_pos
     neg_acc = TN / total_neg
-    # logging.info(f"train new epoch:{epoch}, lr:{optimizer.state_dict()['param_groups'][0]['lr']:0.5f}, [total:{total_acc:0.2f}-pos:{pos_acc:0.2f}-neg:{pos_acc:0.2f}], loss:{losses.avg:.2f},time consume:{time_counter.interval():.2f }s\r")
-    return total_acc, pos_acc, neg_acc, losses.avg
+    logging.info(f"train new epoch:{epoch},  [total_acc:{total_acc}-pos_acc:{pos_acc}-neg_acc:{pos_acc}], loss_avg:{losses.avg},time consume:{time_counter.interval()}s")
+    return total_acc, pos_acc, neg_acc, losses.avg,patch_list[:10]
 
 
 
@@ -93,9 +90,13 @@ def valid_epoch(net,loss_fn,out_fn,dataloader):
     total_acc = (TP + TN) / total
     pos_acc = TP / total_pos
     neg_acc = TN / total_neg
+    logging.info(f'total_pos:{total_pos},total_neg:{total_neg}')
     return total_acc, pos_acc, neg_acc, losses.avg,
 
-def hard_epoch(net,loss_fn,out_fn,dataloader,epoch,workspace):
+def hard_epoch(net,out_fn,dataloader,epoch,workspace):
+    '''
+    采样20W个样本
+    '''
     records = []
     samples = 0
     for i, data in enumerate(dataloader, 0):
@@ -107,7 +108,6 @@ def hard_epoch(net,loss_fn,out_fn,dataloader,epoch,workspace):
         for i, patch_name in zip(outputs, patch_names):
             if i > 0.5:
                 records.append(patch_name + '\n')
-
         if samples > 200000:
             break
     save_path=os.path.join(workspace,epoch)

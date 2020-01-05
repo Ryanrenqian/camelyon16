@@ -1,6 +1,15 @@
 import sys,os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
-from basic.data import DATASET,Sampler
+# sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
+# from basic.data import DATASET, Sampler
+from basic.data import *
+DATASET={
+    "ListDataset":ListDataset,
+    "DynamicDataset": DynamicDataset,
+    "ValidDataset":ValidDataset,
+}
+Sampler={
+    "RandomSampler":RandomSampler
+}
 import torchvision.transforms as transforms
 import torch
 import torch.utils.data
@@ -37,9 +46,9 @@ class DataLoader(object):
     def __init__(self):
         self.dataset=None
 
-    def load_data(self):
+    def load_train_data(self):
         pass
-    def prepare_data(self):
+    def load_valid_data(self):
         pass
 
     def get_transforms(self,shorter_side_range=(224, 224), size=(224, 224)):
@@ -50,38 +59,65 @@ class DataLoader(object):
                                    transforms.ToTensor(),
                                    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-class DynamicLoader(DataLoader):
+class LoaderOne(DataLoader):
+    '''
+    TrainSet: From NCRF
+    Valid: From NCRF
+    '''
     def __init__(self,**kwargs):
-        super(DynamicLoader,self).__init__()
+        super(LoaderOne,self).__init__()
         _size=kwargs["crop_size"]
-        self.dataset=DATASET["DynamicDataset"](tumor_list=kwargs["tumor_list"],
+        self.trainset=DATASET["ValidDataset"](tumor_list=kwargs['train']["tumor_list"],
+                                                     normal_list=kwargs['train']["normal_list"],
+                                                     transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
+                                                     data_size=kwargs['train']["data_size"],
+                                                     tif_folder=kwargs['train']["tif_folder"],
+                                                     patch_size=kwargs['train']["patch_size"])
+        self.validset = DATASET["ValidDataset"](tumor_list=kwargs['valid']["tumor_list"],
                                                      normal_list=kwargs["normal_list"],
                                                      transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
-                                                     data_size=kwargs["data_size"],
-                                                     tif_folder=kwargs["tif_folder"],
-                                                     patch_size=kwargs["patch_size"])
-        if kwargs["sampler"] in Sampler.keys():
-            self.sampler = Sampler[kwargs["sampler"]](self.dataset, kwargs["data_size"])
+                                                     tif_folder=kwargs['valid']["tif_folder"],
+                                                     patch_size=kwargs['valid']["patch_size"])
 
-    def load_data(self,**kwargs):
-        return torch.utils.data.DataLoader(self.dataset, batch_size=kwargs["batch_size"],
-                                           sampler=self.sampler, num_workers=kwargs["num_workers"])
+    def load_train_data(self,**kwargs):
+        return torch.utils.data.DataLoader(self.trainset.train_data(), batch_size=kwargs["batch_size"],
+                                           shuffle=True, num_workers=kwargs["num_workers"])
+    def load_valid_data(self,**kwargs):
+        return torch.utils.data.DataLoader(self.validset, batch_size=kwargs["batch_size"],
+                                            num_workers=kwargs["num_workers"])
+    def load_normal_data(self,**kwargs):
+        return torch.utils.data.DataLoader(self.trainset.normal, batch_size=kwargs["batch_size"],
+                                           shuffle=True,num_workers=kwargs["num_workers"])
 
-class ValidDataLoader(DataLoader):
+class DynamicLoader(DataLoader):
+    '''
+    TrainSet:Dynamic
+    Valid:Dynamic
+    '''
     def __init__(self,**kwargs):
-        super(DataLoader,self).__init__()
-        _size = kwargs["crop_size"]
-        # transform = self.get_transforms(shorter_side_range=(_size, _size), size=(_size, _size))
-        self.dataset = DATASET["ValidDataset"](tumor_list=kwargs["tumor_list"],
-                                                     normal_list=kwargs["normal_list"],
-                                                     # transform=transform,
-                                                     tif_folder=kwargs["tif_folder"],
-                                                     patch_size=kwargs["patch_size"])
+        super(DynamicLoader,self).__init__()
+        _size=kwargs['train']["crop_size"]
+        self.dataset=DATASET["DynamicDataset"](tumor_list=kwargs['train']["tumor_list"],
+                                                     normal_list=kwargs['train']["normal_list"],
+                                                     transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
+                                                     tif_folder=kwargs['train']["tif_folder"],
+                                                     patch_size=kwargs['train']["patch_size"])
+        if kwargs['train']["sampler"] in Sampler.keys():
+            self.train_sampler = Sampler[kwargs['train']["sampler"]](self.dataset, kwargs['train']["data_size"])
+        if kwargs['valid']["sampler"] in Sampler.keys():
+            self.valid_sampler = Sampler[kwargs['valid']["sampler"]](self.dataset, kwargs['valid']["data_size"])
 
-    def load_data(self,**kwargs):
-        return torch.utils.data.DataLoader(self.dataset,
-                                           batch_size=kwargs["batch_size"],
-                                           num_workers=kwargs["num_workers"])
+    def load_train_data(self,**kwargs):
+        return torch.utils.data.DataLoader(self.dataset, batch_size=kwargs["batch_size"],
+                                            sampler=self.train_sampler,num_workers=kwargs["num_workers"])
+    def load_valid_data(self,**kwargs):
+        return torch.utils.data.DataLoader(self.dataset, batch_size=kwargs["batch_size"],
+                                            sampler=self.valid_sampler,num_workers=kwargs["num_workers"])
+
+
+
+
+
 
 class HardDataLoader(DataLoader):
     def __init__(self,hardlist,**kwargs):

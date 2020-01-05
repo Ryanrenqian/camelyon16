@@ -1,7 +1,7 @@
 import sys,os,argparse,json,logging
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 from basic.data.PreData import preData
-from basic.data.DataLoader import DynamicLoader,ValidDataLoader,HardDataLoader
+from basic.data import *
 from basic.models import MODELS,OUT_FN
 from basic.train import valid_epoch,train_epoch,Loss,optims,hard_epoch
 import torch.nn as nn
@@ -18,7 +18,7 @@ def get_args():
     return  parse.parse_args()
 
 def main():
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logging.basicConfig(level=logging.INFO, filename='log.txt',format='%(asctime)s - %(levelname)s - %(message)s')
     args=get_args()
     with open(args.config,'r')as f:
         config = json.load(f)
@@ -32,15 +32,14 @@ def main():
         tumor_list,normal_list=preData(**config["dataset"]["train"])
     config["dataset"]["train"]['tumor_list']=tumor_list
     config["dataset"]["train"]['normal_list']=normal_list
-    train_dataloader = DynamicLoader(**config["dataset"]["train"])
-    valid_dataloader = ValidDataLoader(**config['dataset']['valid'])
-
+    # dyanamicloader= DynamicLoader(**config["dataset"]["train"])
+    dataloader = DATALOADER[config['dataloader']](**config["dataset"])
     # load model
     model_name=config["model"]
     logging.info(f'loading {model_name}')
     train_config = config['train']
     valid_config = config['valid']
-    net = nn.DataParallel(MODELS[model_name](), device_ids=train_config['GPU'])
+    net = nn.DataParallel(MODELS[model_name], device_ids=train_config['GPU'])
     optimizer = optims[train_config["optimizer"]["optim"]](net.parameters(), lr=train_config["optimizer"]['lr'], momentum=train_config["optimizer"]['momentum'],weight_decay=train_config["optimizer"]['weight_decay'])
     save = os.path.join(config['workspace'], 'train', 'model')
     out_fn=OUT_FN[config["model"]]
@@ -54,6 +53,11 @@ def main():
         optimizer.load_state_dict(ckpt[1])
         train_config['start'] = ckpt[2]+1
         last_epoch = ckpt[2]
+        for state in optimizer.state.values():
+            for k, v in state.items():
+                if isinstance(v, torch.Tensor):
+                    state[k] = v.cuda()
+        train_config['start'] = ckpt[2]+1
     net.to('cuda')
     # set train
     loss_fn = Loss[train_config['loss']]
@@ -66,9 +70,14 @@ def main():
     writer=SummaryWriter(visualize_path)
     best_epoch = 0
     best_valid_acc = 0
+    f_patch_list=[]
     for epoch in range(train_config['start'],train_config['last']):
         # train
-        total_acc, pos_acc, neg_acc, loss=train_epoch(epoch, net,loss_fn,out_fn, train_dataloader.load_data(**train_config),  optimizer)
+        total_acc, pos_acc, neg_acc, loss,patch_list=train_epoch(epoch, net,loss_fn,out_fn, dataloader.load_train_data(**train_config),  optimizer)
+        if patch_list != f_patch_list:
+            f_patch_list=patch_list
+        else:
+            logging.info(f"epoch {epoch}: patch_list is same")
         writer.add_scalar('acc_in_train',total_acc,epoch)
         writer.add_scalar('pos_acc_in_train', pos_acc,epoch)
         writer.add_scalar('neg_acc_in_train', neg_acc,epoch)
@@ -76,7 +85,7 @@ def main():
         writer.add_scalar('Lr', optimizer.state_dict()['param_groups'][0]['lr'], epoch)
         scheduler.step()
         # valid
-        total_acc, pos_acc, neg_acc, loss = valid_epoch(net,loss_fn,out_fn, valid_dataloader.load_data(**valid_config))
+        total_acc, pos_acc, neg_acc, loss = valid_epoch(net,loss_fn,out_fn, dataloader.load_valid_data(**valid_config))
         writer.add_scalar('acc_in_valid', total_acc,epoch)
         writer.add_scalar('pos_acc_in_valid', pos_acc,epoch)
         writer.add_scalar('neg_acc_in_valid', neg_acc,epoch)
@@ -105,7 +114,7 @@ def main():
     optimizer = optims[hard_config["optimizer"]](net.parameters(), lr=hard_config["optimizer"]['lr'])
     for epoch in range(hard_config['epoch']):
         # find hard expamples
-        hardlist=hard_epoch(epoch, net, loss_fn,out_fn, train_dataloader.load_data(**hard_config), optimizer)
+        hardlist=hard_epoch(epoch, net, out_fn, dataloader.load_normal_data(**hard_config), optimizer)
         hard_dataloader=HardDataLoader(hardlist,**config['dataset']['hard'])
         # train
         total_acc, pos_acc, neg_acc, loss = train_epoch(epoch,loss_fn,hard_dataloader,optimizer)
@@ -114,8 +123,8 @@ def main():
         writer.add_scalar('neg_acc_in_hard', neg_acc, epoch)
         writer.add_scalar('loss_in_hard', loss, epoch)
         writer.add_scalar('Lr_in_hard ', optimizer.state_dict()['param_groups'][0]['lr'], epoch)
-        # valid
-        total_acc, pos_acc, neg_acc, loss = valid_epoch(net, loss_fn, valid_dataloader.load_data(**valid_config))
+        # valid, 使用trainSet中的normal样本检查是否合适
+        total_acc, pos_acc, neg_acc, loss = valid_epoch(net, loss_fn, dataloader.load_normal_data(**valid_config))
         writer.add_scalar('acc_in_valid', total_acc,epoch)
         writer.add_scalar('pos_acc_in_valid', pos_acc,epoch)
         writer.add_scalar('neg_acc_in_valid', neg_acc,epoch)

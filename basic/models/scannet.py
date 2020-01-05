@@ -29,3 +29,4 @@ class Scannet(nn.Module):
 
 def scannet_out(x):
     return F.softmax(x)[:,1].cpu()
+

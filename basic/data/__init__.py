@@ -1,10 +1,10 @@
-from basic.data.datasets import ListDataset,DynamicDataset,ValidDataset
+from basic.data.datasets import *
 from basic.data.sampler import RandomSampler
-DATASET={
-    "ListDataset":ListDataset,
-    "DynamicDataset":DynamicDataset,
-    "ValidDataset":ValidDataset,
-}
+from basic.data.DataLoader import *
 Sampler={
     "RandomSampler":RandomSampler
+}
+DATALOADER={
+    'LoaderOne':LoaderOne,
+    'DynamicLoader':DynamicLoader,
 }
