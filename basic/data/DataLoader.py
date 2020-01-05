@@ -70,7 +70,6 @@ class LoaderOne(DataLoader):
         self.trainset=DATASET["ValidDataset"](tumor_list=kwargs['train']["tumor_list"],
                                                      normal_list=kwargs['train']["normal_list"],
                                                      transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
-                                                     data_size=kwargs['train']["data_size"],
                                                      tif_folder=kwargs['train']["tif_folder"],
                                                      patch_size=kwargs['train']["patch_size"])
         self.validset = DATASET["ValidDataset"](tumor_list=kwargs['valid']["tumor_list"],
