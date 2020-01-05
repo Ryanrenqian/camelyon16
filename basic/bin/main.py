@@ -18,7 +18,7 @@ def get_args():
     return  parse.parse_args()
 
 def main():
-    logging.basicConfig(level=logging.INFO, filename='log.txt',format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.basicConfig(level=logging.INFO,format='%(asctime)s - %(levelname)s - %(message)s')
     args=get_args()
     with open(args.config,'r')as f:
         config = json.load(f)
