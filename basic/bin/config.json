@@ -18,8 +18,8 @@
       "data_size": 200000
     },
     "valid": {
-      "normal_list" : "",
-      "tumor_list" : "",
+      "normal_list" : "../../predata/validation/valid_normal.list",
+      "tumor_list" : "../../predata/validation/valid_tumor.list",
       "tif_folder": "/root/workspace/dataset/CAMELYON16/training/*",
       "sampler": "RandomSampler",
       "patch_size": 244,

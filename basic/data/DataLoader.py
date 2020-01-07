@@ -87,7 +87,7 @@ class LoaderOne(DataLoader):
                                             num_workers=kwargs["num_workers"])
     def load_normal_data(self,**kwargs):
         return torch.utils.data.DataLoader(self.trainset.normal, batch_size=kwargs["batch_size"],
-                                           shuffle=True,num_workers=kwargs["num_workers"])
+                                           shuffle=True, num_workers=kwargs["num_workers"])
 
 class DynamicLoader(DataLoader):
     '''
@@ -113,6 +113,9 @@ class DynamicLoader(DataLoader):
     def load_valid_data(self,**kwargs):
         return torch.utils.data.DataLoader(self.dataset, batch_size=kwargs["batch_size"],
                                             sampler=self.valid_sampler,num_workers=kwargs["num_workers"])
+    def load_normal_data(self,**kwargs):
+        return torch.utils.data.DataLoader(self.dataset.normal, batch_size=kwargs["batch_size"],
+                                           shuffle=True,num_workers=kwargs["num_workers"])
 
 
 

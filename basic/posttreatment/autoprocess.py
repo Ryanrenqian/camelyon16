@@ -1,7 +1,7 @@
 import sys, os,logging,glob,time
 sys.path.append('..')
 from basic.posttreatment import ScanNetPost,Scan
-from basic.model import Scannet
+from basic.models import Scannet
 
 import torch
 import numpy as np

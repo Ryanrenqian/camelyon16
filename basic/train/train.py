@@ -57,7 +57,7 @@ def train_epoch(epoch,net,loss_fn,out_fn,dataloader,optimizer):
     pos_acc = TP / total_pos
     neg_acc = TN / total_neg
     logging.info(f"train new epoch:{epoch},  [total_acc:{total_acc}-pos_acc:{pos_acc}-neg_acc:{pos_acc}], loss_avg:{losses.avg},time consume:{time_counter.interval()}s")
-    return total_acc, pos_acc, neg_acc, losses.avg,patch_list[:10]
+    return total_acc, pos_acc, neg_acc, losses.avg
 
 
 

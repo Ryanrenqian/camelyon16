@@ -46,6 +46,7 @@ def main():
     optimizer = optims[train_config["optimizer"]["optim"]](net.parameters(), lr=train_config["optimizer"]['lr'], momentum=train_config["optimizer"]['momentum'],weight_decay=train_config["optimizer"]['weight_decay'])
     save = os.path.join(config['workspace'], 'train', 'model')
     out_fn=OUT_FN[config["model"]]
+
     if not os.path.exists(save):
         os.system(f"mkdir -p {save}")
     ckpter = Checkpointer(save)
@@ -71,16 +72,13 @@ def main():
     # visualization
     visualize_path=os.path.join(config['workspace'],'train','visualization')
     writer=SummaryWriter(visualize_path)
+    writer.add_text('config',str(config))
     best_epoch = 0
     best_valid_acc = 0
     f_patch_list=[]
     for epoch in range(train_config['start'],train_config['last']):
         # train
-        total_acc, pos_acc, neg_acc, loss,patch_list=train_epoch(epoch, net,loss_fn,out_fn, dataloader.load_train_data(**train_config),  optimizer)
-        if patch_list != f_patch_list:
-            f_patch_list=patch_list
-        else:
-            logging.info(f"epoch {epoch}: patch_list is same")
+        total_acc, pos_acc, neg_acc, loss=train_epoch(epoch, net,loss_fn,out_fn, dataloader.load_train_data(**train_config),  optimizer)
         writer.add_scalar('acc_in_train',total_acc,epoch)
         writer.add_scalar('pos_acc_in_train', pos_acc,epoch)
         writer.add_scalar('neg_acc_in_train', neg_acc,epoch)

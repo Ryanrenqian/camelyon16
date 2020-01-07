@@ -71,11 +71,10 @@ class DeepLab(nn.Module):
                             if p.requires_grad:
                                 yield p
 
-if __name__ == "__main__":
-    model = DeepLab(backbone='mobilenet', output_stride=16)
-    model.eval()
-    input = torch.rand(1, 3, 513, 513)
-    output = model(input)
-    print(output.size())
-
+import os
+#加载model
+deepresnet = DeepLab(backbone='resnet')
+ckpt = torch.load('../models/pretrainedmodel/deeplab-resnet.pth')
+deepresnet.load_state_dict(ckpt['state_dict'])
+deepresnet.decoder.last_conv[8]=nn.Conv2d(256, 2, kernel_size=(1, 1), stride=(1, 1))
 

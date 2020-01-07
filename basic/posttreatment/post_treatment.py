@@ -58,10 +58,10 @@ class ScanNetPost():
             ed2 = time.time()
             logging.info('each Iter, filter st-ed: %.4f' % (ed2 - ed))
             indexes = np.argwhere(labels == i)
-            y, x = np.sum(indexes, axis=0) / indexes.shape[0]
-            x = x * self.Sd
-            y = y * self.Sd
-            csvRows.append([max_p, x, y])
+            for x,y in indexes:
+                x = x * self.Sd
+                y = y * self.Sd
+                csvRows.append([max_p, x, y])
             ed3 = time.time()
             logging.info('each Iter, index st-ed: %.4f' % (ed3 - ed2))
 

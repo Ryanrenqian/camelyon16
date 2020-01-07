@@ -8,7 +8,7 @@ import glob
 import openslide
 import os
 import pdb
-import time
+import time,logging
 import numpy as np
 
 class MaskDataset():
@@ -72,6 +72,8 @@ class ListDataset():
         :param _patch_list_txt:
         :param transform:
         """
+        list_file=os.path.abspath(list_file)
+        logging.info(f"loading examples from {list_file}")
         tif_list = glob.glob(os.path.join(tif_folder, '*.tif'))
         tif_list.sort()
         with open(list_file,'r')as f:
