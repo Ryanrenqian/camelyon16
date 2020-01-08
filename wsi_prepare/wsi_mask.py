@@ -59,7 +59,7 @@ def main_flow(slide_path, xml_path, save_folder, down_sample):
     """
     save_basename = os.path.basename(slide_path).split('.')[0]
     slide = openslide.open_slide(slide_path)
-    if os.path.exists('%s/%s_resize_%02d_mask' % (save_folder, save_basename, down_sample)):
+    if os.path.exists('%s/%s_resize_%02d_mask.npy' % (save_folder, save_basename, down_sample)):
         return None
     scale_dim = [int(dim / down_sample) for dim in slide.level_dimensions[0]]
     # 图像的dim顺序和np的不同，需要注意下转换
