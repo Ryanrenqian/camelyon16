@@ -13,5 +13,5 @@ optims={
 }
 Loss={
     "CrossEntropyLoss":nn.CrossEntropyLoss(),
-    "FocalLoss":FocalLoss()
+    "FocalLoss":FocalLoss(class_num=2)
 }

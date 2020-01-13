@@ -8,7 +8,7 @@ import sys
 class Scannet(nn.Module):
     def __init__(self, in_channels=3, out_channels=2, pretrained=True):
         super(Scannet, self).__init__()
-        vgg =models.vgg16(pretrained)
+        vgg =models.vgg16(pretrained,model_dir="/userhome/renqian/download_models")
         features = list(vgg.features.children())
 
         # Set padding=0 in features
