@@ -6,5 +6,6 @@ MODELS = {
     "DeepLabResNet":deepresnet
 }
 OUT_FN={
-    'scannet':scannet_out
+    'scannet':scannet_out,
+    "DeepLabResNet":None
 }

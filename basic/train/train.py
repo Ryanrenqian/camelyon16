@@ -75,8 +75,9 @@ def valid_epoch(net,loss_fn,out_fn,dataloader):
             inputs = Variable(inputs.type(torch.FloatTensor))
         outputs = net(inputs).squeeze().cpu()
         loss = loss_fn(outputs, labels)
-        probs = out_fn(outputs)
-        correct_pos, total_pos, correct_neg, total_neg = acc_metric(probs, labels, 0.5)
+        if out_fn !=None:
+            outputs = out_fn(outputs)
+        correct_pos, total_pos, correct_neg, total_neg = acc_metric(outputs, labels, 0.5)
         acc['correct_pos'].addval(correct_pos)
         acc['total_pos'].addval(total_pos)
         acc['correct_neg'].addval(correct_neg)
