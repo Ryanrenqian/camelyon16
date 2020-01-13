@@ -22,7 +22,7 @@ class MaskDataset():
         :param _patch_list_txt:
         :param transform:
         """
-        tif_list = glob.glob(os.path.join(, '*.tif'))
+        tif_list = glob.glob(os.path.join(tif_folder, '*.tif'))
         tif_list.sort()
         mask_list=glob.glob(os.path.join(mask_folder,'*.npy'))
         with open(list_file,'r')as f:
