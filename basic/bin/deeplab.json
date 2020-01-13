@@ -1,0 +1,68 @@
+{
+  "workspace": "/root/workspace/renqian/segmentation/exp4",
+  "model": "DeepLabResNet",
+  "dataloader": "LoaderOne",
+  "dataset": {
+    "patch_size": 1024,
+    "crop_size": 512,
+    "type": "Mask",
+    "level": 3,
+    "train": {
+      "otsu_folder": "",
+      "gt_mask_folder": "",
+      "downsample": 64,
+      "threshold": 0.1,
+      "tif_folder": "",
+       "save_path":"../../predata/train/",
+      "data_size": 200000
+    },
+    "valid": {
+      "normal_list" : "../../predata/validation/valid_normal.list",
+      "tumor_list" : "../../predata/validation/valid_tumor.list",
+      "tif_folder": "",
+      "sampler": "RandomSampler",
+
+      "crop_size": 244,
+      "data_size": 20000
+    },
+    "hard": {
+      "tif_folder": "",
+      "patch_size": 244,
+      "crop_size": 244,
+      "datasize": 200000
+    }
+  },
+  "train": {
+    "GPU": [0,1],
+    "batch_size": 128,
+    "num_workers": 20,
+    "loss": "CrossEntropyLoss",
+    "start": 0,
+    "last": 250,
+    "optimizer": {
+      "optim": "SGD",
+      "lr": 0.0001,
+      "momentum": 0.9,
+      "weight_decay": 0.1
+    },
+    "scheduler": {
+      "gamma": 0.9,
+      "step_size": [8]
+    }
+  },
+  "valid": {
+    "batch_size": 64,
+    "num_workers": 20
+  },
+  "hard": {
+    "epoch": 10,
+    "batch_size": 256,
+    "num_workers": 20,
+    "loss": "CrossEntropyLoss",
+    "optimizer": {
+      "optim": "SGD",
+      "lr": 0.02,
+      "momentum": 0.9
+    }
+  }
+}

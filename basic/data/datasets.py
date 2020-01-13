@@ -12,7 +12,7 @@ import time,logging
 import numpy as np
 
 class MaskDataset():
-    def __init__(self, list_file,mask_folder,transform=None,level=0, tif_folder='/root/workspace/dataset/CAMELYON16/training/*',
+    def __init__(self, list_file,tif_folder,mask_folder,transform=None,level=0,
                  patch_size=256):
         """
         _patch_list_txt：
@@ -22,7 +22,7 @@ class MaskDataset():
         :param _patch_list_txt:
         :param transform:
         """
-        tif_list = glob.glob(os.path.join(tif_folder, '*.tif'))
+        tif_list = glob.glob(os.path.join(, '*.tif'))
         tif_list.sort()
         mask_list=glob.glob(os.path.join(mask_folder,'*.npy'))
         with open(list_file,'r')as f:

@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34175a4c-8f0b-4db9-b615-1e99cb7195dc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic/bin/deeplab.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/analysis/Evaluation_Babak.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/analysis/Evaluation_Babak.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/models/backbone/resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/models/backbone/resnet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsi_prepare/wsi_otsu.py" beforeDir="false" afterPath="$PROJECT_DIR$/wsi_prepare/wsi_otsu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/data/DataLoader.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/DataLoader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/data/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/data/datasets.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,12 +57,12 @@
     <key name="OPEN_URL_DIALOG">
       <recent name="https://github.com/jfzhang95/pytorch-deeplab-xception" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="B:\camelyon\segmentation\basic" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="B:\camelyon\segmentation\basic\bin" />
       <recent name="B:\camelyon\segmentation\basic\models" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="B:\camelyon\segmentation\basic" />
     </key>
   </component>
   <component name="RunManager">
@@ -123,6 +124,7 @@
       <workItem from="1577785310217" duration="95013000" />
       <workItem from="1578450755806" duration="8398000" />
       <workItem from="1578878992519" duration="214000" />
+      <workItem from="1578882772662" duration="2743000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <created>1577783644826</created>
@@ -387,10 +389,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="873" y="359" key="#Deployment/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578276967052" />
-    <state x="736" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578274797706">
+    <state x="736" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578882801768">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="736" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578274797706" />
+    <state x="736" y="356" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578882801768" />
     <state x="1011" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1577764191800">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -455,6 +457,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="343" key="SettingsEditor/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1577785756756" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1578884218240">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.2560.1400/3840.0.1080.1880@0.0.2560.1400" timestamp="1578884218240" />
     <state x="1127" y="616" key="VCS.ChangelistChooser" timestamp="1578278472099">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

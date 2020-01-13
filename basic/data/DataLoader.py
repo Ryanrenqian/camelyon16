@@ -6,6 +6,7 @@ DATASET={
     "ListDataset":ListDataset,
     "DynamicDataset": DynamicDataset,
     "ValidDataset":ValidDataset,
+    "MaskDataset":MaskDataset
 }
 Sampler={
     "RandomSampler":RandomSampler
@@ -68,12 +69,20 @@ class LoaderOne(DataLoader):
         super(LoaderOne,self).__init__()
         _size=kwargs["crop_size"]
         _patch_size=kwargs["patch_size"]
-        self.trainset=DATASET["ValidDataset"](tumor_list=kwargs['train']["tumor_list"],
+        if kwargs['type']=='Mask':
+            self.trainset=DATASET['MaskDataset'](list_file=kwargs['train']["tumor_list"],
+                                                 tif_folder=kwargs['train']["tif_folder"],
+                                                 mask_folder=kwargs['train']['gt_mask_folder'],
+                                                 transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
+                                                 level=kwargs['level'],
+                                                 patch_size=_patch_size)
+        elif kwargs['type']=='Label':
+            self.trainset=DATASET["ValidDataset"](tumor_list=kwargs['train']["tumor_list"],
                                                      normal_list=kwargs['train']["normal_list"],
                                                      transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
                                                      tif_folder=kwargs['train']["tif_folder"],
                                                      patch_size=_patch_size)
-        self.validset = DATASET["ValidDataset"](tumor_list=kwargs['valid']["tumor_list"],
+            self.validset = DATASET["ValidDataset"](tumor_list=kwargs['valid']["tumor_list"],
                                                      normal_list=kwargs['valid']["normal_list"],
                                                      transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
                                                      tif_folder=kwargs['valid']["tif_folder"],
@@ -88,6 +97,9 @@ class LoaderOne(DataLoader):
     def load_normal_data(self,**kwargs):
         return torch.utils.data.DataLoader(self.trainset.normal, batch_size=kwargs["batch_size"],
                                            shuffle=True, num_workers=kwargs["num_workers"])
+
+
+
 
 class DynamicLoader(DataLoader):
     '''
