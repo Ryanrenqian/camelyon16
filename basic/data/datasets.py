@@ -45,7 +45,7 @@ class MaskDataset():
         slide_name = patch_name.split('.tif_')[0] + '.tif'
         slide = openslide.OpenSlide(self.slide_dict[slide_name])  # 直接在这里使用对速度没有明显影响，但slide的缓存会较少很多
         _x, _y = patch_name.split('.tif_')[1].split('_') # 中心点坐标
-        _x, _y = int(_x - self.patch_size / 2), int(_y-self.patch_size/2)
+        _x, _y = int(_x) - self.patch_size // 2, int(_y)-self.patch_size//2
         try:
             img = slide.read_region((_x, _y), self.level, [self.patch_size, self.patch_size]).convert('RGB')
             input_img = self.transform(img)
