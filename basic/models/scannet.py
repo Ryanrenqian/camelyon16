@@ -27,7 +27,7 @@ class Scannet(nn.Module):
         '''
         _initialize_weights for new conv2
         '''
-        for m in self.classifier():
+        for m in self.classifier:
             if isinstance(m, nn.Conv2d):
                 nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
                 if m.bias is not None:

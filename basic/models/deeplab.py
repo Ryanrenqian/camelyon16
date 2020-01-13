@@ -74,7 +74,7 @@ class DeepLab(nn.Module):
 import os
 #加载model
 deepresnet = DeepLab(backbone='resnet')
-ckpt = torch.load('../models/pretrainedmodel/deeplab-resnet.pth')
+ckpt = torch.load('../models/pretrainedmodel/deeplab-resnet.pth',map_location='cpu')
 deepresnet.load_state_dict(ckpt['state_dict'])
 deepresnet.decoder.last_conv[8]=nn.Conv2d(256, 2, kernel_size=(1, 1), stride=(1, 1))
 

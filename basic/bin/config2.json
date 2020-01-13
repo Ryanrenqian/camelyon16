@@ -20,7 +20,7 @@
       "normal_list" : "../../predata/validation/valid_normal.list",
       "tumor_list" : "../../predata/validation/valid_tumor.list",
       "tif_folder": "/root/workspace/dataset/CAMELYON16/training/*",
-      "sampler": "RandomSampler",cd
+      "sampler": "RandomSampler",
 
       "crop_size": 244,
       "data_size": 20000
