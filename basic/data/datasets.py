@@ -53,7 +53,7 @@ class MaskDataset():
             print(str(e))
             print('Image error:%s/n/n' % patch_name)
             input_img, class_id, patch_name = self.__getitem__(0)
-        mask=torch.from_numpy(np.load(self.mask_dict[slide_name.rstrip('.tif')]))
+        mask=torch.from_numpy(np.load(self.mask_dict[slide_name.rstrip('.tif')],dtype=np.float))
         return input_img, mask, patch_name
 
     def __len__(self):
