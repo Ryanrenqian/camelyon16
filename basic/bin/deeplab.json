@@ -3,8 +3,8 @@
   "model": "DeepLabResNet",
   "dataloader": "LoaderOne",
   "dataset": {
-    "patch_size": 1024,
-    "crop_size": 512,
+    "patch_size": 1280,
+    "crop_size": 1280,
     "type": "Mask",
     "level": 3,
     "train": {

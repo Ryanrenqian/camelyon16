@@ -10,6 +10,7 @@ import os
 import pdb
 import time,logging
 import numpy as np
+import math
 
 class MaskDataset():
     def __init__(self, list_file,tif_folder,mask_folder,transform=None,level=0,
@@ -53,7 +54,9 @@ class MaskDataset():
             print(str(e))
             print('Image error:%s/n/n' % patch_name)
             input_img, class_id, patch_name = self.__getitem__(0)
-        mask=torch.from_numpy(np.load(self.mask_dict[slide_name.rstrip('.tif')],dtype=np.float))
+        downsample=math.pow(2,self.level)
+        _x,_y=_x//downsample,_y//downsample
+        mask=torch.from_numpy(np.load(self.mask_dict[slide_name.rstrip('.tif')][_x:_x+self.patch_size,_y:_y+self.patch_size],dtype=np.float))
         return input_img, mask, patch_name
 
     def __len__(self):
