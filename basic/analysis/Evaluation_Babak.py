@@ -189,7 +189,7 @@ def compute_FP_TP_Probs(Ycorr, Xcorr, Probs, is_tumor, evaluation_mask, Isolated
             FP_summary[key] = [Probs[i], Xcorr[i], Ycorr[i]] 
             FP_counter+=1
             
-    num_of_tumors = max_label - len(Isolated_Tumor_Cells);                             
+    num_of_tumors = max_label - len(Isolated_Tumor_Cells);        ++++++
     return FP_probs, TP_probs, num_of_tumors, detection_summary, FP_summary
  
 

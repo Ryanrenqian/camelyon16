@@ -193,7 +193,7 @@ def main_flow(slide_path, xml_path, save_folder, down_sample):
     time_flow_start = time.time()
     slide = openslide.open_slide(slide_path)
     scale_dim = [int(dim / down_sample) for dim in slide.level_dimensions[0]]
-    # 图像的dim顺序和np的不同，需要注意下转换
+    # 图像的dim顺序和np的不同，需要注意下转换+++++++++++++++++++++++++++++++++++++++++++++++++
     pseudo_np = np.zeros([scale_dim[1], scale_dim[0], 3])
 
     multiprocess_block_queue = multiprocessing.Queue(2500)
