@@ -1,25 +1,25 @@
 {
-  "workspace": "/root/workspace/renqian/segmentation/exp4",
+  "workspace": "/root/workspace/renqian/segmentation/deeplab_exp1",
   "model": "DeepLabResNet",
   "dataloader": "LoaderOne",
   "dataset": {
-    "patch_size": 1280,
-    "crop_size": 1280,
+    "patch_size": 768,
+    "crop_size": 768,
     "type": "Mask",
-    "level": 3,
+    "level": 6,
     "train": {
-      "otsu_folder": "",
-      "gt_mask_folder": "",
+      "otsu_folder": "/root/workspace/renqian/0929/prepare_data/wsi_otsu_save/train_resize_64",
+      "gt_mask_folder": "/root/workspace/huangxs/prepare_data/16/wsi_mask/train_64",
       "downsample": 64,
       "threshold": 0.1,
-      "tif_folder": "",
+      "tif_folder": "/root/workspace/dataset/CAMELYON16/training/*",
        "save_path":"../../predata/train/",
       "data_size": 200000
     },
     "valid": {
       "normal_list" : "../../predata/validation/valid_normal.list",
       "tumor_list" : "../../predata/validation/valid_tumor.list",
-      "tif_folder": "",
+      "tif_folder": "/root/workspace/dataset/CAMELYON16/training/*",
       "sampler": "RandomSampler",
 
       "crop_size": 244,
@@ -34,7 +34,7 @@
   },
   "train": {
     "GPU": [0,1],
-    "batch_size": 128,
+    "batch_size": 256,
     "num_workers": 20,
     "loss": "CrossEntropyLoss",
     "start": 0,

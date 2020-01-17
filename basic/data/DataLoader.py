@@ -54,7 +54,7 @@ class DataLoader(object):
 
     def get_transforms(self,shorter_side_range=(224, 224), size=(224, 224)):
         return transforms.Compose([RandomScale(shorter_side_range=shorter_side_range),
-                                   transforms.RandomCrop(size=size),
+#                                   transforms.RandomCrop(size=size),
                                    transforms.RandomHorizontalFlip(),
                                    transforms.ColorJitter(0.05, 0.05, 0.05, 0.05),
                                    transforms.ToTensor(),
@@ -67,25 +67,25 @@ class LoaderOne(DataLoader):
     '''
     def __init__(self,**kwargs):
         super(LoaderOne,self).__init__()
-        _size=kwargs["crop_size"]
-        _patch_size=kwargs["patch_size"]
-        if kwargs['type']=='Mask':
-            self.trainset=DATASET['MaskDataset'](list_file=kwargs['train']["tumor_list"],
-                                                 tif_folder=kwargs['train']["tif_folder"],
-                                                 mask_folder=kwargs['train']['gt_mask_folder'],
+        _size=kwargs["dataset"]["crop_size"]
+        _patch_size=kwargs["dataset"]["patch_size"]
+        if kwargs["dataset"]['type']=='Mask':
+            self.trainset=DATASET['MaskDataset'](list_file=kwargs["dataset"]['train']["samplelist"],
+                                                 tif_folder=kwargs['rawdata']["tif_folder"],
+                                                 mask_folder=kwargs['rawdata']['gt_mask_folder'],
                                                  transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
-                                                 level=kwargs['level'],
+                                                 level=kwargs['predata']['down_sample'],
                                                  patch_size=_patch_size)
-        elif kwargs['type']=='Label':
-            self.trainset=DATASET["ValidDataset"](tumor_list=kwargs['train']["tumor_list"],
-                                                     normal_list=kwargs['train']["normal_list"],
+        elif kwargs["dataset"]['type']=='Label':
+            self.trainset=DATASET["ValidDataset"](tumor_list=kwargs["dataset"]['train']["tumor_list"],
+                                                     normal_list=kwargs["dataset"]['train']["normal_list"],
                                                      transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
-                                                     tif_folder=kwargs['train']["tif_folder"],
+                                                     tif_folder=kwargs['rawdata']["tif_folder"],
                                                      patch_size=_patch_size)
-            self.validset = DATASET["ValidDataset"](tumor_list=kwargs['valid']["tumor_list"],
-                                                     normal_list=kwargs['valid']["normal_list"],
+            self.validset = DATASET["ValidDataset"](tumor_list=kwargs["dataset"]['valid']["tumor_list"],
+                                                     normal_list=kwargs["dataset"]['valid']["normal_list"],
                                                      transform=self.get_transforms(shorter_side_range = (_size, _size), size = (_size, _size)),
-                                                     tif_folder=kwargs['valid']["tif_folder"],
+                                                     tif_folder=kwargs['rawdata']["tif_folder"],
                                                      patch_size=_patch_size)
 
     def load_train_data(self,**kwargs):

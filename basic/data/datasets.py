@@ -1,4 +1,4 @@
-from  PIL import Image
+from PIL import Image
 import torchvision.transforms as transforms
 import random,torch
 import torch.utils.data as data
@@ -13,8 +13,8 @@ import numpy as np
 import math
 
 class MaskDataset():
-    def __init__(self, list_file,tif_folder,mask_folder,transform=None,level=0,
-                 patch_size=256):
+    def __init__(self, list_file,tif_folder,mask_folder,level,patch_size,transform=None,
+                 ):
         """
         _patch_list_txt：
         {'xxx.tif_x_y': 0,
@@ -23,9 +23,16 @@ class MaskDataset():
         :param _patch_list_txt:
         :param transform:
         """
+        list_file = os.path.abspath(list_file)
+        logging.info(f"loading examples from {list_file}")
         tif_list = glob.glob(os.path.join(tif_folder, '*.tif'))
-        tif_list.sort()
+        if tif_list==[]:
+            raise ValueError('tif folder should include tif files.')
+        logging.info(f"loading tifs from {tif_folder}")
+        print(tif_list[:5])
         mask_list=glob.glob(os.path.join(mask_folder,'*.npy'))
+        if tif_list==[]:
+            raise ValueError('mask folder should include mask files(.npy).')
         with open(list_file,'r')as f:
             self.patch_name_list=f.readlines()
         self.patch_size = patch_size
@@ -55,17 +62,22 @@ class MaskDataset():
             print('Image error:%s/n/n' % patch_name)
             input_img, class_id, patch_name = self.__getitem__(0)
         downsample=math.pow(2,self.level)
-        _x,_y=_x//downsample,_y//downsample
-        mask=torch.from_numpy(np.load(self.mask_dict[slide_name.rstrip('.tif')][_x:_x+self.patch_size,_y:_y+self.patch_size],dtype=np.float))
+        _x,_y=int(_x//downsample),int(_y//downsample)
+        try:
+            nparray=np.load(self.mask_dict[slide_name.rstrip('.tif')])
+        # logging.info(f"{_x,_y,nparray.shape}")
+            mask=torch.from_numpy(nparray[_x:_x+self.patch_size,_y:_y+self.patch_size]).float()
+        except:
+            mask=torch.from_numpy(np.zeros((self.patch_size,self.patch_size))).float()
+        # logging.info(mask.shape)
         return input_img, mask, patch_name
 
     def __len__(self):
         return len(self.patch_name_list)
 
 
-
 class ListDataset():
-    def __init__(self, list_file,transform=None,all_class=None,level=0, tif_folder='/root/workspace/dataset/CAMELYON16/training/*',
+    def __init__(self, list_file,tif_folder,transform=None,all_class=None,level=0,
                  patch_size=256):
         """
         _patch_list_txt：

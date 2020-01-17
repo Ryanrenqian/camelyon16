@@ -1,12 +1,11 @@
-import sys,os,argparse,json,logging
+import sys,os,logging
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
-from basic.data.PreData import preData
 from basic.data import *
 from basic.models import MODELS,OUT_FN
 from basic.train import valid_epoch,train_epoch,Loss,optims,hard_epoch
 import torch.nn as nn
 import torch.optim as optim
-from basic.utils import Checkpointer
+from basic.utils import Checkpointer,Config
 try:
     from tensorboardX import SummaryWriter
 except ImportError:
@@ -20,32 +19,33 @@ def get_args():
 def main():
     logging.basicConfig(level=logging.INFO,format='%(asctime)s - %(levelname)s - %(message)s')
     args=get_args()
-    with open(args.config,'r')as f:
-        config = json.load(f)
-    # set train_dataset
-    if config["dataset"]["train"].get("save_path",None):
-        dataset=config["dataset"]["train"]["save_path"]
-    else:
-        dataset =  os.path.join(config['workspace'],'patch_list')
-        config["dataset"]["train"]["save_path"]=dataset
-    tumor_list = os.path.join(dataset, 'train_tumor.list')
-    normal_list = os.path.join(dataset, 'train_normal.list')
-    if not os.path.exists(tumor_list):
-        os.system(f'mkdir -p {dataset}')
-        tumor_list,normal_list=preData(**config["dataset"]["train"])
-    config["dataset"]["train"]['tumor_list']=tumor_list
-    config["dataset"]["train"]['normal_list']=normal_list
-    # dyanamicloader= DynamicLoader(**config["dataset"]["train"])
-    dataloader = DATALOADER[config['dataloader']](**config["dataset"])
+    config=Config(args.config)
+    # with open(args.config,'r')as f:
+    #     config = json.load(f)
+    # # set train_dataset
+    # if config["dataset"]["train"].get("save_path",None):
+    #     dataset=config["dataset"]["train"]["save_path"]
+    # else:
+    #     dataset =  os.path.join(config['workspace'],'patch_list')
+    #     config["dataset"]["train"]["save_path"]=dataset
+    # tumor_list = os.path.join(dataset, 'train_tumor.list')
+    # normal_list = os.path.join(dataset, 'train_normal.list')
+    # if not os.path.exists(tumor_list):
+    #     os.system(f'mkdir -p {dataset}')
+    #     tumor_list,normal_list=preData(**config["dataset"]["train"])
+    # config["dataset"]["train"]['tumor_list']=tumor_list
+    # config["dataset"]["train"]['normal_list']=normal_list
+    # # dyanamicloader= DynamicLoader(**config["dataset"]["train"])
+    dataloader = DATALOADER[config.config['dataloader']](**config.config)
     # load model
-    model_name=config["model"]
+    model_name=config.config["model"]
     logging.info(f'loading {model_name}')
-    train_config = config['train']
-    valid_config = config['valid']
+    train_config = config.config['train']
+    valid_config = config.config['valid']
     net = nn.DataParallel(MODELS[model_name], device_ids=train_config['GPU'])
     optimizer = optims[train_config["optimizer"]["optim"]](net.parameters(), lr=train_config["optimizer"]['lr'], momentum=train_config["optimizer"]['momentum'],weight_decay=train_config["optimizer"]['weight_decay'])
-    save = os.path.join(config['workspace'], 'train', 'model')
-    out_fn=OUT_FN[config["model"]]
+    save = os.path.join(config.config['workspace'], 'train', 'model')
+    out_fn=OUT_FN[config.config["model"]]
 
     if not os.path.exists(save):
         os.system(f"mkdir -p {save}")
@@ -70,9 +70,9 @@ def main():
                                         gamma=train_config['scheduler']['gamma'],
                                         last_epoch=last_epoch)
     # visualization
-    visualize_path=os.path.join(config['workspace'],'train','visualization')
+    visualize_path=os.path.join(config.config['workspace'],'train','visualization')
     writer=SummaryWriter(visualize_path)
-    writer.add_text('config',str(config))
+    writer.add_text('config',str(config.config))
     best_epoch = 0
     best_valid_acc = 0
     f_patch_list=[]
@@ -105,18 +105,18 @@ def main():
     logging.info(f'best_epoch: {best_epoch}, best_valid_acc:{total_acc}')
     best_load=ckpter.load(best_epoch)
     net.load_state_dict(best_load[0])
-    hard_config=config['hard']
+    hard_config=config.config['hard']
     save = os.path.join(config['workspace'], 'hard', 'model')
     if not os.path.exists(save):
         os.system(f"mkdir -p {save}")
     ckpter = Checkpointer(save)
-    visualize_path = os.path.join(config['workspace'], f'hard_{best_epoch}', 'visualization')
+    visualize_path = os.path.join(config.config['workspace'], f'hard_{best_epoch}', 'visualization')
     writer = SummaryWriter(visualize_path)
     optimizer = optims[hard_config["optimizer"]](net.parameters(), lr=hard_config["optimizer"]['lr'])
     for epoch in range(hard_config['epoch']):
         # find hard expamples
         hardlist=hard_epoch(epoch, net, out_fn, dataloader.load_normal_data(**hard_config), optimizer)
-        hard_dataloader=HardDataLoader(hardlist,**config['dataset']['hard'])
+        hard_dataloader=HardDataLoader(hardlist,**config.config ['dataset']['hard'])
         # train
         total_acc, pos_acc, neg_acc, loss = train_epoch(epoch,loss_fn,hard_dataloader,optimizer)
         writer.add_scalar('acc_in_hard', total_acc), epoch
