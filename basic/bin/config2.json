@@ -29,12 +29,9 @@
 			"normal_list": "../../predata/validation/valid_normal.list",
 			"tumor_list": "../../predata/validation/valid_tumor.list",
 			"sampler": "RandomSampler",
-			"crop_size": 1280,
 			"data_size": 200000
 		},
 		"hard": {
-			"patch_size": 244,
-			"crop_size": 244,
 			"datasize": 200000
 		},
 		"type": "Mask"

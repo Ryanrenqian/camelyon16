@@ -73,8 +73,8 @@ def generate_limited_patch_from_slide(slide_basename, normal_file,tumor_file,tum
         level0_x, level0_y = int((y + 0.5) * down_sample), int((x + 0.5) * down_sample)
         tumor_file.write(f'{slide_basename}.tif_{level0_x}_{level0_y}\n')
         tumor_count+=1
-    normal_array=slide_otsu+tumor_array
-    x,y = np.where(normal_array=0)
+    normal_array=slide_otsu + (tumor_array*-1)
+    x,y = np.where(normal_array==1)
     data = [(i, j) for i, j in zip(x, y)]
     random.shuffle(data)  # 随机抽样
     for x,y in data:
@@ -219,17 +219,18 @@ class GenerateData:
         f_t = open(tumor_file, 'w')
         normal_remain=datasize/2
         tumor_remain=datasize/2
+        slide_len=len(self.slide_list)
         for basename in tqdm.tqdm(self.slide_list):
-            normal_size=normal_remain/len(self.slide_list)
+            normal_size=normal_remain/slide_len
             normal_remain-=normal_size
             tumor_size=tumor_remain/(len(self.tumor_slides))
             tumor_remain-=tumor_size
             add_t, add_n = generate_limited_patch_from_slide(slide_basename=basename, normal_file=f_n, tumor_file=f_t,
                                                      otsu_dict=self.otsu_dict, gt_mask_dict=self.gt_mask_dict,
-                                                     down_sample=self.downsample,nomral_size=normal_size,tumor_size=tumor_size)
+                                                     down_sample=self.down_sample,nomral_size=normal_size,tumor_size=tumor_size)
             tumor_count += add_t
             normal_count += add_n
-            self.slide_list.discard(basename)
+            slide_len-=1
             self.tumor_slides.discard(basename)
         logging.info(f'Tumor:{tumor_count}\tNormal:{normal_count}')
         f_n.close()
