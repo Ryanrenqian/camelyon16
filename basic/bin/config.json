@@ -20,7 +20,6 @@
     "train": {
       "resize": 64,
       "downsample": 64,
-      "sampler": "RandomSampler",
       "data_size": 200000
     },
     "valid": {
@@ -48,9 +47,9 @@
     "last": 250,
     "optimizer": {
       "optim": "SGD",
-      "lr": 0.0001,
+      "lr": 0.1,
       "momentum": 0.9,
-      "weight_decay": 0.1
+      "weight_decay": 0.9
     },
     "scheduler": {
       "gamma": 0.01,

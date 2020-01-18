@@ -91,7 +91,7 @@ def valid_epoch(net,loss_fn,out_fn,dataloader):
     total_acc = (TP + TN) / total
     pos_acc = TP / total_pos
     neg_acc = TN / total_neg
-    logging.info(f'total_pos:{total_pos},total_neg:{total_neg}')
+    logging.info(f'total_pos:{total_pos},total_neg:{total_neg} in validation')
     return total_acc, pos_acc, neg_acc, losses.avg,
 
 def hard_epoch(net,out_fn,dataloader,epoch,workspace):

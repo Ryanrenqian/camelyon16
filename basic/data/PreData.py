@@ -210,7 +210,7 @@ class GenerateData:
         logging.info(f"extract {num} patches for training")
         return num,mask_file
 
-    def preLimited(self,datasize=400000):
+    def preLimited(self,datasize):
         logging.info('Generate train_dataset')
         tumor_count, normal_count = 0, 0
         normal_file = os.path.join(self.save_path, 'train_normal.list')
@@ -219,19 +219,23 @@ class GenerateData:
         f_t = open(tumor_file, 'w')
         normal_remain=datasize/2
         tumor_remain=datasize/2
-        slide_len=len(self.slide_list)
-        for basename in tqdm.tqdm(self.slide_list):
-            normal_size=normal_remain/slide_len
-            normal_remain-=normal_size
-            tumor_size=tumor_remain/(len(self.tumor_slides))
-            tumor_remain-=tumor_size
-            add_t, add_n = generate_limited_patch_from_slide(slide_basename=basename, normal_file=f_n, tumor_file=f_t,
-                                                     otsu_dict=self.otsu_dict, gt_mask_dict=self.gt_mask_dict,
-                                                     down_sample=self.down_sample,nomral_size=normal_size,tumor_size=tumor_size)
-            tumor_count += add_t
-            normal_count += add_n
-            slide_len-=1
-            self.tumor_slides.discard(basename)
+        while(tumor_remain!=0 && normal_remain !=0):
+            tumor_slide_len = len(self.tumor_slides)
+            slide_len = len(self.slide_list)
+            for basename in tqdm.tqdm(self.slide_list):
+                normal_size=normal_remain//slide_len
+                tumor_size = 0
+                if basename in self.tumor_slides:
+                    tumor_size=tumor_remain//tumor_slide_len
+                    tumor_slide_len-=1
+                add_t, add_n = generate_limited_patch_from_slide(slide_basename=basename, normal_file=f_n, tumor_file=f_t,
+                                                         otsu_dict=self.otsu_dict, gt_mask_dict=self.gt_mask_dict,
+                                                         down_sample=self.down_sample,nomral_size=normal_size,tumor_size=tumor_size)
+                tumor_remain -= add_t
+                normal_remain -= add_n
+                tumor_count += add_t
+                normal_count += add_n
+                slide_len-=1
         logging.info(f'Tumor:{tumor_count}\tNormal:{normal_count}')
         f_n.close()
         f_t.close()
