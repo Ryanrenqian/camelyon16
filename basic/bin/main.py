@@ -76,11 +76,7 @@ def main():
     f_patch_list=[]
     for epoch in range(train_config['start'],train_config['last']):
         # train
-        total_acc, pos_acc, neg_acc, loss,patch_list=train_epoch(epoch, net,loss_fn,out_fn, dataloader.load_train_data(**train_config),  optimizer)
-        if patch_list != f_patch_list:
-            f_patch_list=patch_list
-        else:
-            logging.info(f"epoch {epoch}: patch_list is same")
+        total_acc, pos_acc, neg_acc, loss=train_epoch(epoch, net,loss_fn,out_fn, dataloader.load_train_data(**train_config),  optimizer)
         writer.add_scalar('acc_in_train',total_acc,epoch)
         writer.add_scalar('pos_acc_in_train', pos_acc,epoch)
         writer.add_scalar('neg_acc_in_train', neg_acc,epoch)

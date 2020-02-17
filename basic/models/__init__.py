@@ -4,7 +4,7 @@ from basic.models.deeplab import *
 
 MODELS = {
     'scannet': Scannet(),
-    # "DeepLabResNet":DeepLab(backbone='resnet', output_stride=2,num_classes=2),
+    "DeepLabMobileNet":DeepLab(backbone='mobilenet', output_stride=2,num_classes=2),
     # "DeepLabResNet":DeepLab(backbone='resnet', output_stride=2,num_classes=2)
 }
 OUT_FN={
