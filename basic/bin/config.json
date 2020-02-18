@@ -30,7 +30,7 @@
       "tif_folder": "/root/workspace/dataset/CAMELYON16/training/*",
       "patch_size": 244,
       "crop_size": 244,
-      "datasize": 200000
+      "datasize": 20000
     }
   },
   "train": {
