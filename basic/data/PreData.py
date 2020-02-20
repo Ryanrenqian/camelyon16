@@ -17,7 +17,7 @@ def filter(otsu, x, y, gap, threshold):
 
 def generate_all_patch_from_slide(slide_basename, normal_file,tumor_file ,otsu_dict, gt_mask_dict, image_size=244,down_sample=64):
     """
-    边扫描边生成新的dataset
+    抽取所有有用的点用于训练
     """
 
     slide_otsu = otsu_dict[slide_basename]
